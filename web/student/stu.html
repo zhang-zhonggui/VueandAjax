@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="jumbotron" style="margin: 0 auto; text-align: center">
+        <h1>student表</h1>
+        <p>增删改查</p>
+        <p><a class="btn btn-primary btn-lg" href="/vue/student/addStu.html" role="button">添加</a></p>
+    </div>
+    <table class="table table-bordered table-hover active table-responsive">
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>地址</td>
+            <td>班级</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for="(s,i) in students">
+            <td>{{s.id}}</td>
+            <td>{{s.name}}</td>
+            <td>{{s.age}}</td>
+            <td>{{s.address}}</td>
+            <td>{{s.grade}}</td>
+            <td>
+                <button type="button" class="btn btn-danger" @click="delStu(s.id)">删除</button>
+                <a type="button" href="/javaWeb/s/getStu?id=${m.id}" class="btn btn-success">修改</a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            students: [],
+        },
+        methods: {
+            delStu: function (id) {
+                $.get("/vue/stu/delStu?id=" + id, function (backData) {
+                    window.location.reload();
+                })
+            }
+        },
+    });
+    $.get("/vue/stu/list", function (backData) {
+        vm.students = backData.data
+    })
+</script>
+</body>
+</html>
