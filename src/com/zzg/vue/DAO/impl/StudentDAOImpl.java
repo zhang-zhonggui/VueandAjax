@@ -1,6 +1,7 @@
 package com.zzg.vue.DAO.impl;
 
 import com.zzg.vue.DAO.StudentDAO;
+import com.zzg.vue.entity.Student;
 import com.zzg.vue.util.DAOUtil;
 
 import java.util.List;
@@ -23,5 +24,11 @@ public class StudentDAOImpl implements StudentDAO {
     public int delStu(String id) {
         String sql = "DELETE FROM student s WHERE id=?";
         return DAOUtil.update(sql,id);
+    }
+
+    @Override
+    public int addStu(Student student) {
+        String sql = "INSERT INTO student values(null,?,?,?,?)";
+        return DAOUtil.update(sql,student.getName(),student.getAge(),student.getAddress(),student.getGrade());
     }
 }
