@@ -32,7 +32,7 @@
             <td>{{s.grade}}</td>
             <td>
                 <button type="button" class="btn btn-danger" @click="delStu(s.id)">删除</button>
-                <a type="button" href="/javaWeb/s/getStu?id=${m.id}" class="btn btn-success">修改</a>
+                <a type="button" v-bind:href=" '/vue/student/update.html?id='+s.id" class="btn btn-success">修改</a>
             </td>
         </tr>
 
